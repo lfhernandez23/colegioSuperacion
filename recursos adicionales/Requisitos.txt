@@ -1,0 +1,6 @@
+1. Instalación de Xampp
+2. Mover Archivos a Ruta C:
+3. Crear la BD en localhost
+4. Guardar las credenciales
+5. Iniciar automáticamente APACHE y Mysql al ingresar en modo administrador
+6. Para que lea las imagenes ingresar a config de XAMPP y quitar el ; de extension=gd, reiniciar el apache. 

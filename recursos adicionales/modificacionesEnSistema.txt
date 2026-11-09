@@ -1,0 +1,44 @@
+Jornadas 
+Plan Diario (Matutina y Vespertina)
+Sabatina (Fin de semana)
+
+Grado asignado:
+Preprimaria o Parvulos 1,2 y 3
+Primaria 1,2,3,4,5 y 6
+Básico 1,2,3
+Diversificado Plan Diario
+Perito Contador con Orientacion en Computación.  4, 5 y 6
+Bachiller en Computación con Orientacion comercial. 4 y 5 
+Perito en Administración de Empresa.  4, 5 y 6
+
+Diversificado Plan Fin de Semana 
+Perito Contador con Orientacion en Computación.  4, 5 y 6
+Bachiller en Ciencias y Letra por Madurez 4 
+
+1 basico por madurez
+2 basico por madurez
+
+Basico normal en Fin de semana 1, 2 y 3
+
+
+CODIGO c417rnn
+CARNET 2024-80
+
+UTILIZAR CARNET MEJOR EN VES DE CODIGO
+
+
+Ver codigo ya que en ves de carnet mejor por inscripcion. 
+
+Mensualidad y mes que cancela seleccionar la cantidad de meses que quiere cancelar el cliente. 
+
+Número de recibo: CON LETRA Y SERIE A Y DESDE EL NUMERO 1. 
+
+CONTROL DE RECIBOS CON AUTORIZACION DE MANERA UNICA. 
+
+FALTA POR HACER:
+ 
+LISTADO DE PAGOS POR GRADO
+
+LISTADO DE ESTUDIANTES POR GRADO Y AÑO. LISTADO CARNE, CODIGO Y NOMBRE . Y CANTIDAD TOTAL Y LISTADOS DE ORDEN ALFABETICAMENTE. 
+
+RECIBO ELECTRONICO EN PDF POR LOS PAGOS MEDIA CARTA.

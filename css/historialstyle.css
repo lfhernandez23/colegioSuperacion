@@ -1,0 +1,33 @@
+/* Estilo para el contenedor principal */
+.container {
+    max-width: 95%;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Agregado para desplazamiento horizontal */
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px; /* Aumentado el padding para mejorar la visualización */    
+    text-align: center;
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+th {    
+    font-weight: bold;
+}
+
+tfoot td {
+    font-weight: bold;
+}

@@ -1,0 +1,22 @@
+CREATE TABLE registro_estudiantes (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    carnet VARCHAR(20) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    sexo VARCHAR(10) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    jornada VARCHAR(20) NOT NULL,
+    direccion_vivienda VARCHAR(100),
+    nombre_padre VARCHAR(50),
+    nombre_madre VARCHAR(50),
+    fecha_inscripcion DATE,
+    info_adicional TEXT,
+    tel_alumno VARCHAR(15),
+    tel_encargado VARCHAR(15),
+    email_encargado VARCHAR(50),
+    grado_asignado VARCHAR(10) NOT NULL,
+    nombre_tutor VARCHAR(50),
+    tipo_sangre VARCHAR(5),
+    tipo_inscripcion VARCHAR(30),
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
