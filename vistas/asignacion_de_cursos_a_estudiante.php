@@ -54,7 +54,7 @@
                 $id_estudiante = $estudiante['id'];
         
                 // Preparar consulta de inserción
-                $consultaInsertar = "INSERT INTO asignacion_cursos (id_estudiante, carnet, id_curso, ciclo_escolar) VALUES (?, ?, ?, ?)";
+                $consultaInsertar = "INSERT INTO asignacion_cursos (id_estudiante, carnet, id_curso, ciclo_escolar) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id = id";
                 $stmtInsertar = $conn->prepare($consultaInsertar);
         
                 foreach ($cursos_seleccionados as $id_curso) {
