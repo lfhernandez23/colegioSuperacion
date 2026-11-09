@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Envío de correo de confirmación                        
             $mensaje = "Curso creado de forma exitosa.";
             echo "<script>alert('$mensaje'); window.location.href='../vistas/navegacion.php';</script>";
-            echo "setTimeout(function() { window.location.href = '../vistas/navegacion.php'; }, 1000);</script>";
             // Salir del script PHP
             exit();
         } else {
