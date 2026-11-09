@@ -1,0 +1,15 @@
+# Evitar nuevos respaldos con datos personales y credenciales locales.
+*.sql
+*.sql.gz
+*.sql.zip
+.env
+.env.*
+!.env.example
+config.local.php
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+# Archivos de origen Windows de flujos NTFS
+*:Zone.Identifier
