@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Formulario de Creación de Cursos</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
@@ -31,9 +32,7 @@
                 <option value="diario-vespertino" <?php echo ($jornada === 'diario-vespertino') ? 'selected' : ''; ?>>Plan Diario - Vespertino</option>
                 <option value="fin-de-semana" <?php echo ($jornada === 'fin-de-semana') ? 'selected' : ''; ?>>Plan Fin de Semana - Sabatino</option>
             </select>
-            <script>
-                actualizargrado();
-            </script>
+            
             <label for="nivel">Nivel Asignado </label>
             <select id="nivel" name="nivel" required>
                 <option value="preprimaria" <?php echo ($nivel === 'preprimaria' || isset($_GET['nivel']) && $_GET['nivel'] === 'preprimaria') ? 'selected' : ''; ?>>Pre-Primaria</option>
@@ -66,111 +65,7 @@
         </form>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Actualizamos el nivel tan pronto como la página cargue
-            actualizarNivel();
-
-            // Asegurémonos de que el grado se actualice cuando el nivel cambie
-            document.getElementById("nivel").addEventListener("change", actualizarGrado);
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            actualizarNivel(); // Llamar a la función una vez que se cargue la página
-
-            // Asegúrate de actualizar el grado cuando el nivel cambie
-            document.getElementById("nivel").addEventListener("change", actualizarGrado);
-        });
-
-        function actualizarNivel() {
-            var jornada = document.getElementById("jornada").value;
-            var nivelSelect = document.getElementById("nivel");
-
-            // Eliminar opciones anteriores
-            nivelSelect.innerHTML = "";
-
-            // Añadir opciones según la jornada seleccionada
-            if (jornada === "diario-matutino") {
-                agregarOpcionNivel("- Seleccione una Opcion - ", "noselecciono", nivelSelect);
-                agregarOpcionNivel("Pre-Primaria", "preprimaria", nivelSelect);
-                agregarOpcionNivel("Primaria", "primaria", nivelSelect);
-                agregarOpcionNivel("Básico", "basico", nivelSelect);
-                agregarOpcionNivel("Bachiller en Computación con Orientacion Comercial", "diversificado3", nivelSelect);
-                agregarOpcionNivel("Perito Contador con Orientacion en Computación", "diversificado1", nivelSelect);
-                agregarOpcionNivel("Perito en Administración de Empresa", "diversificado2", nivelSelect);
-            } else if (jornada === "diario-vespertino") {
-                agregarOpcionNivel("- Seleccione una Opcion - ", "noselecciono", nivelSelect);
-                agregarOpcionNivel("Pre-Primaria", "preprimaria", nivelSelect);
-                agregarOpcionNivel("Primaria", "primaria", nivelSelect);
-                agregarOpcionNivel("Básico", "basico", nivelSelect);
-                agregarOpcionNivel("Bachiller en Computación con Orientacion Comercial", "diversificado3", nivelSelect);
-                agregarOpcionNivel("Perito Contador con Orientacion en Computación", "diversificado1", nivelSelect);
-                agregarOpcionNivel("Perito en Administración de Empresa", "diversificado2", nivelSelect);
-            } else if (jornada === "fin-de-semana") {
-                agregarOpcionNivel("- Seleccione una Opcion - ", "noselecciono", nivelSelect);
-                agregarOpcionNivel("Básico", "basico", nivelSelect);
-                agregarOpcionNivel("Básico por Madurez", "basicopormadurez", nivelSelect);
-                agregarOpcionNivel("Bachiller en Ciencias y Letra por Madurez", "diversificado4", nivelSelect);
-                agregarOpcionNivel("Perito Contador con Orientacion en Computación", "diversificado1", nivelSelect);
-            }
-        }
-
-        function agregarOpcionNivel(texto, valor, select) {
-            var opcion = document.createElement("option");
-            opcion.text = texto;
-            opcion.value = valor;
-            select.add(opcion);
-        }
-
-        function actualizarGrado() {
-            var nivel = document.getElementById("nivel").value;
-            var gradoSelect = document.getElementById("grado");
-
-            // Eliminar opciones anteriores
-            gradoSelect.innerHTML = "";
-
-            // Ajuste de niveles por grado  
-            if (nivel === "preprimaria") {
-                agregarOpcionGrado("1er Grado", "1grado", gradoSelect);
-                agregarOpcionGrado("2do Grado", "2grado", gradoSelect);
-                agregarOpcionGrado("3er Grado", "3grado", gradoSelect);
-            } else if (nivel === "primaria") {
-                agregarOpcionGrado("1er Grado", "1grado", gradoSelect);
-                agregarOpcionGrado("2do Grado", "2grado", gradoSelect);
-                agregarOpcionGrado("3er Grado", "3grado", gradoSelect);
-                agregarOpcionGrado("4to Grado", "4grado", gradoSelect);
-                agregarOpcionGrado("5to Grado", "5grado", gradoSelect);
-                agregarOpcionGrado("6to Grado", "6grado", gradoSelect);
-            } else if (nivel === "basico") {
-                agregarOpcionGrado("1er Grado", "1grado", gradoSelect);
-                agregarOpcionGrado("2do Grado", "2grado", gradoSelect);
-                agregarOpcionGrado("3er Grado", "3grado", gradoSelect);
-            } else if (nivel === "basicopormadurez") {
-                agregarOpcionGrado("1er Grado", "1grado", gradoSelect);
-                agregarOpcionGrado("2do Grado", "2grado", gradoSelect);
-            } else if (nivel === "diversificado1") {
-                agregarOpcionGrado("4to Grado", "4grado", gradoSelect);
-                agregarOpcionGrado("5to Grado", "5grado", gradoSelect);
-                agregarOpcionGrado("6to Grado", "6grado", gradoSelect);
-            } else if (nivel === "diversificado2") {
-                agregarOpcionGrado("4to Grado", "4grado", gradoSelect);
-                agregarOpcionGrado("5to Grado", "5grado", gradoSelect);
-                agregarOpcionGrado("6to Grado", "6grado", gradoSelect);
-            } else if (nivel === "diversificado3") {
-                agregarOpcionGrado("4to Grado", "4grado", gradoSelect);
-                agregarOpcionGrado("5to Grado", "5grado", gradoSelect);
-            } else if (nivel === "diversificado4") {
-                agregarOpcionGrado("4to Grado", "4grado", gradoSelect);;
-            }
-        }
-
-        function agregarOpcionGrado(texto, valor, select) {
-            var opcion = document.createElement("option");
-            opcion.text = texto;
-            opcion.value = valor;
-            select.add(opcion); // Corrige el error tipográfico aquí
-        }
-    </script>
+    <script defer src="../js/selectores-academicos.js"></script>
 </body>
 
 </html>
