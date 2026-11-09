@@ -1,4 +1,4 @@
-w<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -58,6 +58,7 @@ w<!DOCTYPE html>
             background-color: green;
         }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
