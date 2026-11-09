@@ -46,6 +46,7 @@
             background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 5px;
         }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 <body>
     <?php include './header.php'; ?>
