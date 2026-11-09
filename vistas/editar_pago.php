@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?><?php
 include_once "../controlador/conexion_bd.php";
 
 // Definir variables para el mes y tipo de pago
