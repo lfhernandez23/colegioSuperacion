@@ -277,6 +277,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_carnet"])) {
         .success a { color: #006400; text-decoration: underline; }
         .success a:hover { color: #004d00; }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
