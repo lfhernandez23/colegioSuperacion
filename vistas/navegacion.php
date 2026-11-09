@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Barra de Navegación</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
