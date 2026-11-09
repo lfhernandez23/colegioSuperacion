@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Formulario de Inscripción en Otro Ciclo</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
