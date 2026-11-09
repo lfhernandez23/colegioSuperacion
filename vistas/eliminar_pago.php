@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <?php
-session_start(); // Mantenlo si planeas usar mensajes de sesión para feedback al usuario
+// La sesión autenticada ya fue iniciada al comienzo del archivo.
 
 // --- INICIO DE SECCIÓN DE SEGURIDAD ---
 // Es MUY RECOMENDABLE añadir aquí tu lógica de autenticación y autorización.
