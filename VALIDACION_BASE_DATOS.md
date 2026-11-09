@@ -42,3 +42,18 @@ Se analizó el respaldo `colegio_superacion (19).sql` generado el 5 de noviembre
 7. Resolver los hallazgos de seguridad antes de exponer el sistema a Internet.
 
 Las consultas solo de lectura están disponibles en `pruebas/validacion_integridad.sql`. Ninguna inconsistencia se corrigió o eliminó directamente de la base original.
+
+## Pruebas no destructivas de operaciones (SQLite)
+Se ejecutaron operaciones de escritura **solo en una base temporal en memoria**, con datos ficticios y deshaciendo los cambios mediante rollback. Pasaron 7 de 7 comprobaciones:
+1. Insertar inscripción de estudiante.
+2. Insertar curso.
+3. Asignar curso a estudiante.
+4. Insertar calificaciones.
+5. Insertar pago.
+6. Actualizar pago filtrando por carné, ciclo, autorización e ID de recibo.
+7. Eliminar pago por su ID.
+
+Estas pruebas validan principalmente correspondencia de columnas y consultas básicas, pero **no** prueban la ejecución PHP/MySQLi, los cálculos específicos de MariaDB ni los flujos de navegador.
+
+## Validación de producción
+**No aprobado todavía.** La validación final debe hacerse en MariaDB 10.4+ con un respaldo anonimizado o datos de prueba, corrigiendo antes la autenticación/sesiones y el tratamiento de información personal. No ejecutar pruebas de escritura contra la base de producción.
