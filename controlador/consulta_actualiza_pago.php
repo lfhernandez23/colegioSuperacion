@@ -26,15 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Preparar la consulta SQL para la actualización
     $sql_actualizar = "UPDATE control_pagos cp
-                        INNER JOIN registro_estudiantes re ON cp.carnet = re.carnet
-                        SET  cp.fecha_pago = ?, cp.mes_pago = ?, cp.tipo_pago = ?, cp.monto = ?, cp.observacion_adicional = ?
-                        WHERE cp.carnet = ? AND cp.num_autorizacion = ? AND cp.id_pago = ?";
+                        SET cp.fecha_pago = ?, cp.mes_pago = ?, cp.tipo_pago = ?, cp.monto = ?, cp.observacion_adicional = ?
+                        WHERE cp.carnet = ? AND cp.ciclo_escolar = ? AND cp.num_autorizacion = ? AND cp.id_pago = ?";
 
     // Preparar la sentencia de actualización
     $stmt_actualizar = $conn->prepare($sql_actualizar);
 
     // Vincular parámetros para la actualización
-    $stmt_actualizar->bind_param("ssssssss", $fecha_pago, $mes_pago, $tipo_pago, $monto, $observacion_adicional, $carnet, $num_autorizacion, $id_pago);
+    $stmt_actualizar->bind_param("ssssssssi", $fecha_pago, $mes_pago, $tipo_pago, $monto, $observacion_adicional, $carnet, $ciclo_escolar, $num_autorizacion, $id_pago);
 
     // Ejecutar la sentencia de actualización
     if ($stmt_actualizar->execute()) {
