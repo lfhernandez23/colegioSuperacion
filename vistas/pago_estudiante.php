@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?><?php
 function generarCodigoUnico($longitud = 8)
 {
     // Caracteres permitidos para el código
