@@ -117,7 +117,7 @@ $cursos_seleccionados = isset($_GET['cursos']) ? $_GET['cursos'] : [];
     $resultadoEstudiantes = $stmt->get_result();
     
     if ($resultadoEstudiantes->num_rows > 0) {
-        $consultaInsertar = "INSERT INTO asignacion_cursos (id_estudiante, carnet, id_curso, ciclo_escolar) VALUES (?, ?, ?, ?)";
+        $consultaInsertar = "INSERT INTO asignacion_cursos (id_estudiante, carnet, id_curso, ciclo_escolar) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id = id";
         $stmtInsertar = $conn->prepare($consultaInsertar);
     
         $total_estudiantes = 0;
