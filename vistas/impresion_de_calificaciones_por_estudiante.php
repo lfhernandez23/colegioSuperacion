@@ -73,6 +73,7 @@ function estadoPromocion($promedio)
     <link rel="stylesheet" href="../css/navstyle.css" />
     <link rel="stylesheet" href="../css/inscripcionstyle.css">
     <link rel="stylesheet" href="../css/reportesstyle.css">
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
