@@ -62,7 +62,7 @@
                             <li><a href="buscar_carnet_estudiante.php">Buscar Carnet Escolar de Estudiante</a></li>
                         </ul>
 </li>
-        <li class="nav-item logout"><a class="nav-link" href="../index.php">Cerrar sesión</a></li>
+        <li class="nav-item logout"><a class="nav-link" href="../controlador/cerrar_sesion.php">Cerrar sesión</a></li>
       </ul>
     </nav>
   </div>
