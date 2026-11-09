@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/navstyle.css" />
     <link rel="stylesheet" href="../css/reportesstyle.css" />
     <title>Formulario de Búsqueda</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
