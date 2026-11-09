@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 // imprimir_carnet.php V4.3 - Generate PDF based on HTML Display Styles
 
