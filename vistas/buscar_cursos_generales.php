@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 // Capturar la URL actual con sus parámetros GET para mantener el estado al buscar
 $parametrosGet = $_SERVER['QUERY_STRING']; // Ej: jornada=mañana&nivel=primaria&grado=1grado
