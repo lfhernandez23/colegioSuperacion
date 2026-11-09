@@ -1,17 +1,6 @@
 <?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
 <?php
-    // Conexión a la BD colegio_superacion
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "colegio_superacion";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
+    require_once __DIR__ . "/conexion_bd.php";
 
     // Inicializar $resultados y otras variables
     $resultados = [];
@@ -20,28 +9,24 @@
     // Verificar si se hizo una solicitud POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Obtener los datos del formulario
-        $opcion = $_POST["opcion_busqueda"];
-        $criterio = $_POST["buscar"];
+        $opcion = (string) ($_POST["opcion_busqueda"] ?? "");
+        $criterio = trim((string) ($_POST["buscar"] ?? ""));
 
-        // Escapar las variables para evitar inyección de SQL
-        $opcion = mysqli_real_escape_string($conn, $opcion);
-        $criterio = mysqli_real_escape_string($conn, $criterio);
-
-        // Construir la consulta según el criterio de búsqueda
-        if ($opcion === 'codigo') {
-            $sql = "SELECT * FROM registro_estudiantes WHERE codigo LIKE '%$criterio%'";
-        } elseif ($opcion === 'carnet') {
-            $sql = "SELECT * FROM registro_estudiantes WHERE carnet LIKE '%$criterio%'";
-        } elseif ($opcion === 'nombre') {
-            $sql = "SELECT * FROM registro_estudiantes WHERE nombres LIKE '%$criterio%'";
-        } else {
-            // Otras opciones de búsqueda según tus necesidades
-            echo "<p>Opción de búsqueda no válida.</p>";
-            exit; // Detener la ejecución del script
+        // Solo se permite un catálogo de columnas, nunca SQL de entrada del usuario.
+        $columnas = ['codigo' => 'codigo', 'carnet' => 'carnet', 'nombre' => 'nombre'];
+        if (!isset($columnas[$opcion]) || $criterio === '') {
+            http_response_code(400);
+            echo '<p>Criterio de búsqueda inválido.</p>';
+            exit;
         }
 
-        // Ejecutar la consulta
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM registro_estudiantes WHERE {$columnas[$opcion]} LIKE ? ORDER BY apellido, nombre LIMIT 50";
+        $stmt = $conn->prepare($sql);
+        $buscar = '%' . $criterio . '%';
+        $stmt->bind_param('s', $buscar);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
 
         // Verificar si se encontraron resultados
         if ($result->num_rows > 0) {
@@ -61,7 +46,7 @@
 
             ?>
             <br>
-            <form id="editarForm" action="../vistas/editar_estudiante.php" method="post">
+            <form id="editarForm" action="../vistas/buscar_estudiante.php" method="post">
                 <!-- Campos del formulario -->
 
                 <!-- Resto de campos... -->
