@@ -1,9 +1,8 @@
 <?php
+require_once __DIR__ . '/../controlador/auth.php';
+colegio_requerir_sesion();
 $colegio_base_path = dirname(dirname(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/colegioSuperacion/vistas/eliminar_pago.php')));
 $colegio_fallback_historial = rtrim($colegio_base_path, '/') . '/vistas/historial_pago.php';
-?>
-<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
-<?php
 // La sesión autenticada ya fue iniciada al comienzo del archivo.
 
 // --- INICIO DE SECCIÓN DE SEGURIDAD ---
