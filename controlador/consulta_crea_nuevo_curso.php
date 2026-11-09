@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recibir datos del formulario y sanitizarlos
     $jornada = $_POST["jornada"];
