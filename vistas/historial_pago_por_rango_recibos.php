@@ -34,6 +34,7 @@
         .input-group strong { margin-right: 5px; font-size: 1.1em; }
          h2, h3 { text-align: center; }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 <body>
 <?php include './header.php'; ?>
