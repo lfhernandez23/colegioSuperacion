@@ -142,6 +142,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mostrar_historial"]))
         /* Style for the message when no records are found via AJAX */
         #no-records-message-js { margin-top: 20px; padding: 15px; background-color: #f8f9fa; border: 1px solid #ced4da; border-radius: 5px; text-align: center; }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 <body>
 <?php include './header.php'; ?>
