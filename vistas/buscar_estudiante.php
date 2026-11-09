@@ -139,6 +139,7 @@
         ?>
                     <br>
                     <form id="editarForm" action="../controlador/consulta_actualiza_estudiante.php" method="post">
+                        <input type="hidden" name="id_estudiante" value="<?php echo (int) $resultados_array['id']; ?>">
 
                         <label for="carnet">Número de Carnet</label>
                         <input type="text" id="carnet" name="carnet" value="<?php echo $carnet; ?>" required />
@@ -167,9 +168,7 @@
                             <option value="diario-vespertino" <?php echo ($jornada === 'diario-vespertino') ? 'selected' : ''; ?>>Plan Diario - Vespertino</option>
                             <option value="fin-de-semana" <?php echo ($jornada === 'fin-de-semana') ? 'selected' : ''; ?>>Plan Fin de Semana - Sabatino</option>
                         </select>
-                        <script>
-                            actualizargrado();
-                        </script>
+                        
                         <label for="nivel">Nivel Asignado </label>
                         <select id="nivel" name="nivel" required>
                             <option value="preprimaria" <?php echo ($nivel === 'preprimaria') ? 'selected' : ''; ?>>Pre-Primaria</option>
