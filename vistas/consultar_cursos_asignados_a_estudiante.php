@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Consultar y Eliminar Cursos Asignados</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
