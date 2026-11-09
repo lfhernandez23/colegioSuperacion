@@ -33,6 +33,7 @@
         }
          h2, h3 { text-align: center; }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 <body>
 <?php include './header.php'; ?>
