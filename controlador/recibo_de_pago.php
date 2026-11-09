@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 ob_start();
 
 include_once "../controlador/conexion_bd.php";
