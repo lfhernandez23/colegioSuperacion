@@ -31,6 +31,7 @@ $fecha_pago_formateada = date("d-m-Y", strtotime($fecha_pago));
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Buscar y Editar Inscripcion</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
