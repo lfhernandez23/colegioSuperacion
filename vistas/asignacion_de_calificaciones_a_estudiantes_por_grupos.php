@@ -259,6 +259,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["buscar"])) {
             color: #856404;
         }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
