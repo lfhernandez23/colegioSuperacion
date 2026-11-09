@@ -1,3 +1,7 @@
+<?php
+$colegio_base_path = dirname(dirname(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/colegioSuperacion/vistas/eliminar_pago.php')));
+$colegio_fallback_historial = rtrim($colegio_base_path, '/') . '/vistas/historial_pago.php';
+?>
 <?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 // La sesión autenticada ya fue iniciada al comienzo del archivo.
@@ -15,7 +19,7 @@ if (!isset($_SESSION['id_usuario'])) { // Verificar si el usuario está logueado
 if (!isset($_SESSION['rol_permite_eliminar']) || $_SESSION['rol_permite_eliminar'] !== true) {
     $_SESSION['mensaje_error'] = "Acceso denegado. No tiene permisos para eliminar recibos.";
     // Redirigir a una página anterior o a una página de error específica
-    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/colegio_superacion/vistas/pagina_historial_default.php';
+    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $colegio_fallback_historial;
     header('Location: ' . $redirect_url_error . (strpos($redirect_url_error, '?') ? '&' : '?') . 'status=delete_auth_failed');
     exit;
 }
@@ -30,7 +34,7 @@ if (!isset($_SESSION['rol_permite_eliminar']) || $_SESSION['rol_permite_eliminar
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     // $_SESSION['mensaje_error'] = "Acceso no permitido (método de solicitud incorrecto).";
     // Redirigir si no es POST
-    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/colegio_superacion/vistas/pagina_historial_default.php';
+    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $colegio_fallback_historial;
     header('Location: ' . $redirect_url_error . (strpos($redirect_url_error, '?') ? '&' : '?') . 'status=invalid_request_method');
     exit;
 }
@@ -38,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 // Verificar que los parámetros necesarios para la eliminación hayan sido enviados y no estén vacíos
 if (!isset($_POST["id_pago"]) || empty(trim($_POST["id_pago"])) || !isset($_POST["serie_recibo"]) || empty(trim($_POST["serie_recibo"]))) {
     // $_SESSION['mensaje_error'] = "Información insuficiente para eliminar el recibo (faltan ID o Serie).";
-    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/colegio_superacion/vistas/pagina_historial_default.php';
+    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $colegio_fallback_historial;
     header('Location: ' . $redirect_url_error . (strpos($redirect_url_error, '?') ? '&' : '?') . 'status=missing_params');
     exit;
 }
@@ -49,7 +53,7 @@ $serie_recibo_a_eliminar = htmlspecialchars(trim($_POST["serie_recibo"])); // Sa
 
 if ($id_pago_a_eliminar === false || $id_pago_a_eliminar <= 0) {
     // $_SESSION['mensaje_error'] = "Error: El ID del pago no es válido.";
-    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/colegio_superacion/vistas/pagina_historial_default.php';
+    $redirect_url_error = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $colegio_fallback_historial;
     header('Location: ' . $redirect_url_error . (strpos($redirect_url_error, '?') ? '&' : '?') . 'status=invalid_id');
     exit;
 }
@@ -68,9 +72,9 @@ $filas_afectadas = -1; // Inicializar con -1 para indicar un posible error o no 
 // Si `id_pago` es único y es la clave primaria, la serie podría no ser necesaria para la eliminación directa,
 // pero es bueno tenerla para confirmación o si forma parte de una clave compuesta.
 // Opción 1: Eliminar solo por id_pago (si es la clave primaria única)
-$consulta_eliminar = "DELETE FROM control_pagos WHERE id_pago = ?";
-$tipos_bind = "i";
-$params_bind = [$id_pago_a_eliminar];
+$consulta_eliminar = "DELETE FROM control_pagos WHERE id_pago = ? AND serie_recibo = ?";
+$tipos_bind = "is";
+$params_bind = [$id_pago_a_eliminar, $serie_recibo_a_eliminar];
 
 // Opción 2: Eliminar por id_pago Y serie_recibo (si forman una clave primaria compuesta)
 // $consulta_eliminar = "DELETE FROM control_pagos WHERE id_pago = ? AND serie_recibo = ?";
@@ -111,7 +115,7 @@ $conn->close();
 
 // --- Redirección ---
 // Por defecto, redirigir a una página general si HTTP_REFERER no está disponible o es problemático.
-$redirect_url_base = '/colegio_superacion/vistas/pagina_historial_default.php'; // Cambia esto a una página de historial adecuada
+$redirect_url_base = $colegio_fallback_historial; // Cambia esto a una página de historial adecuada
 
 if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
     $referer = filter_var($_SERVER['HTTP_REFERER'], FILTER_SANITIZE_URL);
@@ -119,7 +123,7 @@ if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
 
     // Asegurarse de que el referer es de nuestro propio sitio para evitar Open Redirect Vulnerability
     // Ejemplo: if (isset($referer_parts['host']) && $referer_parts['host'] == $_SERVER['HTTP_HOST']) {
-    if (isset($referer_parts['path'])) {
+    if (isset($referer_parts['path']) && str_starts_with($referer_parts['path'], rtrim($colegio_base_path, '/') . '/vistas/')) {
         $redirect_url_base = $referer_parts['path'];
         $query_string = "";
         if (isset($referer_parts['query'])) {
