@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 // Incluir la conexión a la base de datos una sola vez al principio si es posible.
 // Si header.php ya incluye la conexión, este include podría no ser necesario aquí.
