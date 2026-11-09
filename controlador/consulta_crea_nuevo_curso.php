@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recibir datos del formulario y sanitizarlos
     $jornada = $_POST["jornada"];
@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Envío de correo de confirmación                        
             $mensaje = "Curso creado de forma exitosa.";
             echo "<script>alert('$mensaje'); window.location.href='../vistas/navegacion.php';</script>";
-            echo "setTimeout(function() { window.location.href = '../vistas/navegacion.php'; }, 1000);</script>";
             // Salir del script PHP
             exit();
         } else {
@@ -36,8 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt_insertar->close();
 
 
-    // Cerrar la conexión y la sentencia de verificación
-    $stmt_verificar->close();
+    // Cerrar la conexión
     $conn->close();
 } else {
     // Acceso incorrecto al archivo, redirigir o manejar de acuerdo a las necesidades    

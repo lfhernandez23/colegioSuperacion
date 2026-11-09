@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,6 +34,7 @@
         }
          h2, h3 { text-align: center; }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 <body>
 <?php include './header.php'; ?>
@@ -63,11 +65,10 @@
                 cp.tipo_pago, cp.monto, cp.fecha_pago, cp.mes_pago, cp.observacion_adicional, 
                 re.nombre, re.apellido, re.jornada, re.grado, re.nivel, re.ciclo_escolar
             FROM control_pagos cp
-            INNER JOIN (
-                SELECT carnet, MAX(ciclo_escolar) AS ciclo_escolar
-                FROM registro_estudiantes GROUP BY carnet
-            ) AS re_max ON cp.carnet = re_max.carnet
-            INNER JOIN registro_estudiantes re ON cp.carnet = re.carnet AND re.ciclo_escolar = re_max.ciclo_escolar
+            LEFT JOIN registro_estudiantes re ON re.id = (
+                SELECT MIN(re2.id) FROM registro_estudiantes re2
+                WHERE re2.carnet = cp.carnet AND re2.ciclo_escolar = cp.ciclo_escolar
+            )
             WHERE cp.fecha_pago BETWEEN ? AND ?
             ORDER BY cp.fecha_pago ASC, cp.id_pago ASC";
             

@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 // Archivo: funciones_generar_boleta.php
 
 /**

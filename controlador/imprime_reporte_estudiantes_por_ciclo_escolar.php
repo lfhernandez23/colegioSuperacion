@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 ob_start();
 
 if (htmlspecialchars($_GET["jornada"] === "diario-matutino")) {

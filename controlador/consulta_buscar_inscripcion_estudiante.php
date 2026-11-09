@@ -1,16 +1,5 @@
-<?php
-    // Conexión a la BD colegio_superacion
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "colegio_superacion";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
+    require_once __DIR__ . "/conexion_bd.php";
 
     // Inicializar $resultados y otras variables
     $resultados = [];
@@ -19,57 +8,47 @@
     // Verificar si se hizo una solicitud POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Obtener los datos del formulario
-        $opcion = $_POST["opcion_busqueda"];
-        $criterio = $_POST["buscar"];
+        $opcion = (string) ($_POST["opcion_busqueda"] ?? "");
+        $criterio = trim((string) ($_POST["buscar"] ?? ""));
 
-        // Escapar las variables para evitar inyección de SQL
-        $opcion = mysqli_real_escape_string($conn, $opcion);
-        $criterio = mysqli_real_escape_string($conn, $criterio);
-
-        // Construir la consulta según el criterio de búsqueda
-        if ($opcion === 'codigo') {
-            $sql = "SELECT * FROM registro_estudiantes WHERE codigo LIKE '%$criterio%'";
-        } elseif ($opcion === 'carnet') {
-            $sql = "SELECT * FROM registro_estudiantes WHERE carnet LIKE '%$criterio%'";
-        } elseif ($opcion === 'nombre') {
-            $sql = "SELECT * FROM registro_estudiantes WHERE nombres LIKE '%$criterio%'";
-        } else {
-            // Otras opciones de búsqueda según tus necesidades
-            echo "<p>Opción de búsqueda no válida.</p>";
-            exit; // Detener la ejecución del script
+        // Solo se permite un catálogo de columnas, nunca SQL de entrada del usuario.
+        $columnas = ['codigo' => 'codigo', 'carnet' => 'carnet', 'nombre' => 'nombre'];
+        if (!isset($columnas[$opcion]) || $criterio === '') {
+            http_response_code(400);
+            echo '<p>Criterio de búsqueda inválido.</p>';
+            exit;
         }
 
-        // Ejecutar la consulta
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM registro_estudiantes WHERE {$columnas[$opcion]} LIKE ? ORDER BY apellido, nombre LIMIT 50";
+        $stmt = $conn->prepare($sql);
+        $buscar = '%' . $criterio . '%';
+        $stmt->bind_param('s', $buscar);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
 
-        // Verificar si se encontraron resultados
+        // Mostrar todas las coincidencias (máximo 50); nunca alterar datos desde esta consulta.
         if ($result->num_rows > 0) {
-            // Obtener el primer resultado encontrado (puedes ajustar según tus necesidades)
-            $resultados = $result->fetch_assoc();
-            $sexo = $resultados['sexo'];
-            $fechaNacimiento = $resultados['fecha_nacimiento'];
-            $direccionVivienda = $resultados['direccion_vivienda'];
-            $nombrePadre = $resultados['nombre_padre'];
-            $nombreMadre = $resultados['nombre_madre'];
-            $fechaInscripcion = $resultados['fecha_inscripcion'];
-            $infoAdicional = $resultados['info_adicional'];
-            $telAlumno = $resultados['tel_alumno'];
-            $telEncargado = $resultados['tel_encargado'];
-            $emailEncargado = $resultados['email_encargado'];
-            $jornada = $resultados['jornada'];
-
-            ?>
-            <br>
-            <form id="editarForm" action="../vistas/editar_estudiante.php" method="post">
-                <!-- Campos del formulario -->
-
-                <!-- Resto de campos... -->
-
-                <button type="submit">Guardar Cambios</button>
-            </form>
-            <?php
+            echo '<h2>Resultados de búsqueda</h2>';
+            echo '<table><thead><tr><th>Carné</th><th>Nombre</th><th>Ciclo</th><th>Acción</th></tr></thead><tbody>';
+            while ($fila = $result->fetch_assoc()) {
+                $carnet = (string) $fila['carnet'];
+                $ciclo = (string) $fila['ciclo_escolar'];
+                $nombre = trim((string) $fila['nombre'] . ' ' . (string) $fila['apellido']);
+                $url = '../vistas/buscar_estudiante.php?' . http_build_query([
+                    'buscar' => '1',
+                    'carnet' => $carnet,
+                    'ciclo_escolar' => $ciclo,
+                ]);
+                echo '<tr><td>' . htmlspecialchars($carnet, ENT_QUOTES, 'UTF-8')
+                    . '</td><td>' . htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8')
+                    . '</td><td>' . htmlspecialchars($ciclo, ENT_QUOTES, 'UTF-8')
+                    . '</td><td><a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8')
+                    . '">Consultar inscripción</a></td></tr>';
+            }
+            echo '</tbody></table>';
         } else {
-            echo "<p>No se encontraron resultados.</p>";
+            echo '<p>No se encontraron resultados.</p>';
         }
     }
 

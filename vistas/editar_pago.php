@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?><?php
 include_once "../controlador/conexion_bd.php";
 
 // Definir variables para el mes y tipo de pago
@@ -31,6 +31,7 @@ $fecha_pago_formateada = date("d-m-Y", strtotime($fecha_pago));
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Buscar y Editar Inscripcion</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>

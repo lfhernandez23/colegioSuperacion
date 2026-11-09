@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Asignar Cursos por Grupo</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
@@ -115,7 +117,7 @@ $cursos_seleccionados = isset($_GET['cursos']) ? $_GET['cursos'] : [];
     $resultadoEstudiantes = $stmt->get_result();
     
     if ($resultadoEstudiantes->num_rows > 0) {
-        $consultaInsertar = "INSERT INTO asignacion_cursos (id_estudiante, carnet, id_curso, ciclo_escolar) VALUES (?, ?, ?, ?)";
+        $consultaInsertar = "INSERT INTO asignacion_cursos (id_estudiante, carnet, id_curso, ciclo_escolar) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE id = id";
         $stmtInsertar = $conn->prepare($consultaInsertar);
     
         $total_estudiantes = 0;

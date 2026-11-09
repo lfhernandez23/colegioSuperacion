@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 // Incluir la conexión a la base de datos y el header.
 include_once "../controlador/conexion_bd.php";
@@ -223,6 +224,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["buscar"])) {
         /* Iconos de Font Awesome (si se usan) */
         @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>

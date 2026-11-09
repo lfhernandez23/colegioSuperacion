@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="../css/navstyle.css" />
     <link rel="stylesheet" href="../css/reportesstyle.css" />
     <title>Formulario de Búsqueda</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>

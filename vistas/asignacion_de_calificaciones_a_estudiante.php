@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 include_once "../controlador/conexion_bd.php";
 
@@ -58,6 +59,7 @@ function calcularPromedio($b1, $b2, $b3, $b4) {
     <link rel="stylesheet" href="../css/navstyle.css" />
     <link rel="stylesheet" href="../css/inscripcionstyle.css">
     <link rel="stylesheet" href="../css/reportesstyle.css">
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 <body>
 <?php include './header.php'; ?>

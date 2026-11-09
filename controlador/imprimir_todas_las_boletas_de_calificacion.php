@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 // Archivo: imprimir_todas_boletas.php
 
 // Iniciar buffer para manejo de salida y errores antes de enviar PDF

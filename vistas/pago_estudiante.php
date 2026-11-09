@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?><?php
 function generarCodigoUnico($longitud = 8)
 {
     // Caracteres permitidos para el código
@@ -162,6 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registrar_pago"])) {
     <link rel="stylesheet" href="../css/inscripcionstyle.css" />
     <link rel="stylesheet" href="../css/navstyle.css" />
     <title>Registro de Pagos</title>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>

@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -137,6 +138,7 @@
             cursor: not-allowed;
         }
     </style>
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>

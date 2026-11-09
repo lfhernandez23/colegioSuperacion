@@ -1,5 +1,46 @@
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 ob_start();
+// La inscripción impresa se obtiene por ID desde la base de datos.
+// Evita enviar datos personales en la URL o confiar en campos modificables de GET.
+$id_estudiante = filter_var($_GET['id_estudiante'] ?? null, FILTER_VALIDATE_INT);
+if (!$id_estudiante || $id_estudiante < 1) {
+    http_response_code(400);
+    exit('Identificador de inscripción inválido.');
+}
+require_once __DIR__ . '/conexion_bd.php';
+$stmt = $conn->prepare('SELECT * FROM registro_estudiantes WHERE id = ? LIMIT 1');
+$stmt->bind_param('i', $id_estudiante);
+$stmt->execute();
+$inscripcion = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+$conn->close();
+if (!$inscripcion) {
+    http_response_code(404);
+    exit('No se encontró la inscripción.');
+}
+$_GET = [
+    'carnet' => htmlspecialchars((string) $inscripcion['carnet'], ENT_QUOTES, 'UTF-8'),
+    'codigo' => htmlspecialchars((string) $inscripcion['codigo'], ENT_QUOTES, 'UTF-8'),
+    'nombres' => htmlspecialchars((string) $inscripcion['nombre'], ENT_QUOTES, 'UTF-8'),
+    'apellidos' => htmlspecialchars((string) $inscripcion['apellido'], ENT_QUOTES, 'UTF-8'),
+    'sexo_estudiante' => (string) $inscripcion['sexo'],
+    'fecha_nacimiento' => (string) $inscripcion['fecha_nacimiento'],
+    'jornada' => (string) $inscripcion['jornada'],
+    'grado' => (string) $inscripcion['grado'],
+    'nivel' => (string) $inscripcion['nivel'],
+    'tipo_sangre' => htmlspecialchars((string) $inscripcion['tipo_sangre'], ENT_QUOTES, 'UTF-8'),
+    'direccion_vivienda' => htmlspecialchars((string) $inscripcion['direccion_vivienda'], ENT_QUOTES, 'UTF-8'),
+    'nombre_padre' => htmlspecialchars((string) $inscripcion['nombre_padre'], ENT_QUOTES, 'UTF-8'),
+    'nombre_madre' => htmlspecialchars((string) $inscripcion['nombre_madre'], ENT_QUOTES, 'UTF-8'),
+    'fecha_inscripcion' => (string) $inscripcion['fecha_inscripcion'],
+    'info_adicional' => htmlspecialchars((string) $inscripcion['info_adicional'], ENT_QUOTES, 'UTF-8'),
+    'tel_alumno' => htmlspecialchars((string) $inscripcion['tel_alumno'], ENT_QUOTES, 'UTF-8'),
+    'tel_encargado' => htmlspecialchars((string) $inscripcion['tel_encargado'], ENT_QUOTES, 'UTF-8'),
+    'email_encargado' => htmlspecialchars((string) $inscripcion['email_encargado'], ENT_QUOTES, 'UTF-8'),
+    'nombre_tutor' => htmlspecialchars((string) $inscripcion['nombre_tutor'], ENT_QUOTES, 'UTF-8'),
+    'tipo_inscripcion' => (string) $inscripcion['tipo_inscripcion'],
+];
+
 
 // Formatear la fecha en el formato día-mes-año
 $fecha_pago_formateada_nacimiento = date("d-m-Y", strtotime($_GET['fecha_nacimiento']));
@@ -58,7 +99,7 @@ switch ($_GET["nivel"]) {
         $imprime_nivel = "Perito en Administración de Empresa";
         break;
     case 'diversificado3':
-        $$imprime_nivel = "Bachiller en Computación con Orientacion Comercial";
+         $imprime_nivel = "Bachiller en Computación con Orientacion Comercial";
         break;
     case 'diversificado4':
         $imprime_nivel = "Bachiller en Ciencias y Letra por Madurez";

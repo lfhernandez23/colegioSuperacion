@@ -1,4 +1,4 @@
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 include_once "../controlador/conexion_bd.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_estudiante"]) && isset($_POST["ciclo_escolar"])) {
