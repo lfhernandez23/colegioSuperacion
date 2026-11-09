@@ -33,8 +33,8 @@ function colegio_requerir_sesion(): void
 {
     colegio_iniciar_sesion();
     if (!isset($_SESSION['colegio_usuario_id']) || !is_numeric($_SESSION['colegio_usuario_id'])) {
-        header('Cache-Control: no-store, private');
         if (!headers_sent()) {
+            header('Cache-Control: no-store, private');
             header('Location: ' . colegio_ruta_inicio(), true, 302);
         } else {
             http_response_code(401);
@@ -42,5 +42,7 @@ function colegio_requerir_sesion(): void
         }
         exit;
     }
-    header('Cache-Control: no-store, private');
+    if (!headers_sent()) {
+        header('Cache-Control: no-store, private');
+    }
 }
