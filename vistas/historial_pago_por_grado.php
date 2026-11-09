@@ -135,8 +135,10 @@
                             re.ciclo_escolar 
                         FROM 
                             control_pagos cp
-                        INNER JOIN 
-                            registro_estudiantes re ON cp.carnet = re.carnet AND cp.ciclo_escolar = re.ciclo_escolar 
+                        INNER JOIN registro_estudiantes re ON re.id = (
+                            SELECT MIN(re2.id) FROM registro_estudiantes re2
+                            WHERE re2.carnet = cp.carnet AND re2.ciclo_escolar = cp.ciclo_escolar
+                        ) 
                         WHERE 
                             re.jornada = ? AND 
                             re.grado = ? AND 
