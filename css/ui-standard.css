@@ -39,3 +39,8 @@ body:has(.site-header){padding-top:78px}
 @media(max-width:1200px){.site-header .brand span{display:none}.site-header .nav-trigger,.site-header .nav-link{font-size:.85rem;padding:10px 7px}}
 @media(max-width:991px){.site-header .brand span{display:inline}.site-header .menu-toggle{display:block}.site-header .header-inner{flex-wrap:wrap;gap:8px}.site-header .site-nav{display:none;flex-basis:100%;max-height:calc(100vh - 72px);overflow-y:auto;background:var(--ui-primary);padding:8px 0 14px}.site-header .site-nav.is-open{display:block}.site-header .nav-list{display:block}.site-header .nav-trigger,.site-header .nav-link{display:flex;width:100%;white-space:normal;text-align:left;padding:12px;font-size:1rem}.site-header .submenu{position:static;min-width:0;max-width:none;max-height:none;box-shadow:none;background:var(--ui-primary-dark);border:0;margin:0 0 6px 10px}.site-header .submenu a{color:#fff;padding:10px 15px}.site-header .submenu a:hover,.site-header .submenu a:focus-visible{color:#fff;background:rgba(255,255,255,.12)}.container{margin:16px 12px 30px;padding:20px 16px}}
 @media(max-width:520px){.site-header{padding:0 12px}.site-header .brand{font-size:.85rem;white-space:normal}.site-header .brand img{width:44px;height:44px}.container th,.container td{padding:7px;font-size:.88rem}.container h2{font-size:1.3rem}}
+
+/* Evita que las reglas heredadas de hover eludan el estado accesible del menú. */
+.site-header .nav-item:hover > .submenu{display:none}
+.site-header .nav-item.is-open > .submenu,.site-header .nav-item.is-open:hover > .submenu{display:block}
+@media(min-width:992px){.site-header .nav-item:nth-last-child(-n+3) > .submenu{left:auto;right:0}}
