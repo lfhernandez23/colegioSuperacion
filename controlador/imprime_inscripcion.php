@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 ob_start();
 // La inscripción impresa se obtiene por ID desde la base de datos.
 // Evita enviar datos personales en la URL o confiar en campos modificables de GET.
