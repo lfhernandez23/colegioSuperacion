@@ -35,8 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt_insertar->close();
 
 
-    // Cerrar la conexión y la sentencia de verificación
-    $stmt_verificar->close();
+    // Cerrar la conexión
     $conn->close();
 } else {
     // Acceso incorrecto al archivo, redirigir o manejar de acuerdo a las necesidades    
