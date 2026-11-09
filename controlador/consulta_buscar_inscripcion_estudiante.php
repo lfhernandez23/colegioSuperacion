@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
     require_once __DIR__ . "/conexion_bd.php";
 
     // Inicializar $resultados y otras variables
