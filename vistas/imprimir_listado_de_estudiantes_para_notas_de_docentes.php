@@ -46,6 +46,7 @@
         }
     </style>
 
+  <link rel="stylesheet" href="../css/ui-standard.css">
 </head>
 
 <body>
