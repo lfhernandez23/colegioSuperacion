@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
 <?php
 ob_start();
 
