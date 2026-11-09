@@ -241,7 +241,7 @@
                         </select>
 
                         <button type="button" id="editButton" class="btn btn-confirm">Actualizar Inscripción</button>
-                        <?php echo '<td><a href="../controlador/imprime_inscripcion.php?carnet=' . urlencode($carnet) . '&codigo=' . urlencode($codigo) . '&nombres=' . urlencode($nombres) . '&apellidos=' . urlencode($apellidos) . '&sexo_estudiante=' . urlencode($sexo_estudiante) . '&fecha_nacimiento=' . urlencode($fecha_nacimiento) . '&jornada=' . urlencode($jornada) . '&grado=' . urlencode($grado) . '&nivel=' . urlencode($nivel) . '&tipo_sangre=' . urlencode($tipo_sangre) . '&direccion_vivienda=' . urlencode($direccion_vivienda) . '&nombre_padre=' . urlencode($nombre_padre) . '&nombre_madre=' . urlencode($nombre_madre) . '&fecha_inscripcion=' . urlencode($fecha_inscripcion) . '&info_adicional=' . urlencode($info_adicional) . '&tel_alumno=' . urlencode($tel_alumno) . '&tel_encargado=' . urlencode($tel_encargado) . '&email_encargado=' . urlencode($email_encargado) . '&nombre_tutor=' . urlencode($nombre_tutor) . '&tipo_inscripcion=' . urlencode($tipo_inscripcion) . '"><button type="button" style="width: 600px;">Imprimir Inscripción</button></a></td>'; ?>
+                        <td><a href="../controlador/imprime_inscripcion.php?id_estudiante=<?php echo (int) $resultados_array['id']; ?>">Imprimir Inscripción</a></td>
 
                     </form>
                     <!-- Modal structure -->
