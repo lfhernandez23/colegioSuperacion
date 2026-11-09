@@ -106,7 +106,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["mostrar_historial"]))
 
         $consulta_pagos = "SELECT cp.serie_recibo, cp.num_autorizacion, cp.id_pago, cp.carnet, cp.codigo, cp.tipo_pago, cp.monto, cp.fecha_pago, cp.mes_pago, cp.observacion_adicional, re.nombre, re.apellido, re.jornada, re.grado AS grado, re.nivel, re.ciclo_escolar
         FROM control_pagos cp
-        INNER JOIN registro_estudiantes re ON cp.carnet = re.carnet AND cp.ciclo_escolar = re.ciclo_escolar
+        LEFT JOIN registro_estudiantes re ON re.id = (
+                SELECT MIN(re2.id) FROM registro_estudiantes re2
+                WHERE re2.carnet = cp.carnet AND re2.ciclo_escolar = cp.ciclo_escolar
+            )
         WHERE cp.carnet = ? AND re.ciclo_escolar = ?";
         
         $sentencia_pagos = $conn->prepare($consulta_pagos);
