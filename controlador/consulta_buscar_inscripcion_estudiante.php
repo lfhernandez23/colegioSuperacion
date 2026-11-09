@@ -28,34 +28,28 @@
         $result = $stmt->get_result();
         $stmt->close();
 
-        // Verificar si se encontraron resultados
+        // Mostrar todas las coincidencias (máximo 50); nunca alterar datos desde esta consulta.
         if ($result->num_rows > 0) {
-            // Obtener el primer resultado encontrado (puedes ajustar según tus necesidades)
-            $resultados = $result->fetch_assoc();
-            $sexo = $resultados['sexo'];
-            $fechaNacimiento = $resultados['fecha_nacimiento'];
-            $direccionVivienda = $resultados['direccion_vivienda'];
-            $nombrePadre = $resultados['nombre_padre'];
-            $nombreMadre = $resultados['nombre_madre'];
-            $fechaInscripcion = $resultados['fecha_inscripcion'];
-            $infoAdicional = $resultados['info_adicional'];
-            $telAlumno = $resultados['tel_alumno'];
-            $telEncargado = $resultados['tel_encargado'];
-            $emailEncargado = $resultados['email_encargado'];
-            $jornada = $resultados['jornada'];
-
-            ?>
-            <br>
-            <form id="editarForm" action="../vistas/buscar_estudiante.php" method="post">
-                <!-- Campos del formulario -->
-
-                <!-- Resto de campos... -->
-
-                <button type="submit">Guardar Cambios</button>
-            </form>
-            <?php
+            echo '<h2>Resultados de búsqueda</h2>';
+            echo '<table><thead><tr><th>Carné</th><th>Nombre</th><th>Ciclo</th><th>Acción</th></tr></thead><tbody>';
+            while ($fila = $result->fetch_assoc()) {
+                $carnet = (string) $fila['carnet'];
+                $ciclo = (string) $fila['ciclo_escolar'];
+                $nombre = trim((string) $fila['nombre'] . ' ' . (string) $fila['apellido']);
+                $url = '../vistas/buscar_estudiante.php?' . http_build_query([
+                    'buscar' => '1',
+                    'carnet' => $carnet,
+                    'ciclo_escolar' => $ciclo,
+                ]);
+                echo '<tr><td>' . htmlspecialchars($carnet, ENT_QUOTES, 'UTF-8')
+                    . '</td><td>' . htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8')
+                    . '</td><td>' . htmlspecialchars($ciclo, ENT_QUOTES, 'UTF-8')
+                    . '</td><td><a href="' . htmlspecialchars($url, ENT_QUOTES, 'UTF-8')
+                    . '">Consultar inscripción</a></td></tr>';
+            }
+            echo '</tbody></table>';
         } else {
-            echo "<p>No se encontraron resultados.</p>";
+            echo '<p>No se encontraron resultados.</p>';
         }
     }
 
