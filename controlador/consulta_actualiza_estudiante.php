@@ -1,5 +1,4 @@
-<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?>
-<?php
+<?php require_once __DIR__ . '/auth.php'; colegio_requerir_sesion(); ?><?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_estudiante = filter_var($_POST["id_estudiante"] ?? null, FILTER_VALIDATE_INT);
     if (!$id_estudiante || $id_estudiante <= 0) {
