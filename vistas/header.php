@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../controlador/auth.php'; colegio_requerir_sesion(); ?>
 <header class="site-header">
   <div class="header-inner">
     <a class="brand" href="navegacion.php" aria-label="Volver al menú principal">
